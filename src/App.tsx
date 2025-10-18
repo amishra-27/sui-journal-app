@@ -4,6 +4,8 @@ import { Box, Container, Flex, Heading } from "@radix-ui/themes";
 import { useState } from "react";
 import { Journal } from "./Journal";
 import { CreateJournal } from "./CreateJournal";
+import { JournalList } from "./JournalList";
+import { JournalGallery } from "./JournalGallery";
 
 function App() {
   const currentAccount = useCurrentAccount();
@@ -48,12 +50,26 @@ function App() {
                 }}
               />
             ) : (
-              <CreateJournal
-                onCreated={(id) => {
-                  window.location.hash = id;
-                  setJournal(id);
-                }}
-              />
+              <Flex direction="column" gap="6">
+  <CreateJournal
+    onCreated={(id) => {
+      window.location.hash = id;
+      setJournal(id);
+    }}
+  />
+  <JournalList
+    onSelectJournal={(id) => {
+      window.location.hash = id;
+      setJournal(id);
+    }}
+  />
+  <JournalGallery
+    onSelectJournal={(id) => {
+      window.location.hash = id;
+      setJournal(id);
+    }}
+  />
+</Flex>
             )
           ) : (
             <Heading>Please connect your wallet</Heading>
